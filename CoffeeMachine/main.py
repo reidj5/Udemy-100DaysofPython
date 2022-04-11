@@ -1,4 +1,4 @@
-MENU = {
+menu = {
     "espresso": {
         "ingredients": {
             "water": 50,
@@ -27,8 +27,17 @@ profit = 0
 resources = {
     "water": 300,
     "milk": 200,
-    "coffee": 100,
+    "coffee": 150,
 }
+
+
+def is_resource_sufficient(order_ingredients):
+    for item in order_ingredients:
+        if order_ingredients[item] >= resources[item]:
+            print(f'Sorry there is not enough {item}.')
+            return False
+    return True
+
 
 isOn = True
 while isOn:
@@ -37,4 +46,12 @@ while isOn:
         isOn = False
     elif choice == 'report':
         for resource in resources:
-            print(resource + " " + str(resources[resource]))
+            if resource == 'coffee':
+                print(resource.capitalize() + " " + str(resources[resource]) + ' g')
+            else:
+                print(resource.capitalize() + " " + str(resources[resource]) + ' ml')
+    else:
+        drink = menu[choice]
+        if is_resource_sufficient(drink["ingredients"]):
+
+
